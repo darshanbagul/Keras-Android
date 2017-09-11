@@ -16,3 +16,5 @@ Here are a few output results, which depict the UI of the app along with the cla
 ![Image](https://github.com/darshanbagul/Keras-Android/blob/master/images/5.png)
 
 ![Image](https://github.com/darshanbagul/Keras-Android/blob/master/images/6.png)
+
+The model predicts the output label along with the confidence score for the prediction.
