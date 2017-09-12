@@ -20,7 +20,7 @@ Here are a few output results, which depict the UI of the app along with the cla
 
 The model predicts the output label along with the confidence score for the prediction.
 
-## Setting up the Android Environment
+## Setting up Environment
 
 ### Installation Steps
 
@@ -59,3 +59,34 @@ If you already have Android Studio, skip to Step 5!
         http://docs.onemobilesdk.aol.com/android-ad-sdk/adding-aar-files.html
         
   7. Compile the code and run it on a simulator (or device if you have one)!
+
+### Exporting a pre-trained model
+
+  1. Train your model
+
+  2. Keep an in memory copy of eveything your model learned (like biases and weights) 
+  ```
+  Example: _w = sess.eval(w), 
+  ```
+  where w was learned from training.
+
+  3. Rewrite your model changing the variables for constants with value = in memory copy of learned variables. 
+  ```
+  Example: w_save = tf.constant(_w)
+  ```
+  
+  4. Also make sure to put names in the input and output of the model, this will be needed for the model later. 
+  ```
+  Example:
+  x = tf.placeholder(tf.float32, [None, 1000], name='input')
+  y = tf.nn.softmax(tf.matmul(x, w_save) + b_save), name='output')
+  ```
+
+  5. Export your model with:
+  ```
+  tf.train.write_graph(<graph>, <path for the exported model>, <name of the model>.pb, as_text=False)
+  ```
+  
+  ## Credits
+  
+  Thanks to Siraj Raval (@sirajology) for teaching an amazing course on Deep Learning at Udacity, covering this material and more.
